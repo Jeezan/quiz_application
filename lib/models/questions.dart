@@ -8,6 +8,13 @@ class Questions{
     required this.options
     });
 
+  List<String> get answers{
+
+    List<String> randomAnswer = List.from(options);
+    randomAnswer.shuffle();
+    return randomAnswer;
+  }
+
 }
 
 // return List<String> randomAnswer
