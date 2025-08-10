@@ -29,6 +29,8 @@ class Button extends StatelessWidget {
                     color: Color(0xFF013568),
                     fontSize: 16
                 ),
+
+                textAlign: TextAlign.center,
             ),
         ),
     )

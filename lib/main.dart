@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_application/views/question_screen.dart';
+import 'package:quiz_application/views/start_screen.dart';
 
 void main() {
   runApp(MyApp());
