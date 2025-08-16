@@ -17,5 +17,4 @@ class Questions{
 
 }
 
-// return List<String> randomAnswer
  

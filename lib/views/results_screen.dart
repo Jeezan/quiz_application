@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:quiz_application/components/final_answer.dart';
 import 'package:quiz_application/data/data.dart';
 import 'package:quiz_application/views/start_screen.dart';
 
 
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key});
+  const ResultsScreen({
+    super.key,
+    required this.chosenAnswers
+  });
+
+  final List<String> chosenAnswers;
 
   @override
  Widget build(BuildContext context) {
 
+ int correctAnswerCount = 0;
+
+  for(int i = 0; i< questions.length; i++){
+      if(chosenAnswers[i] == questions[i].options[0]){
+        correctAnswerCount++;   
+      }
+  }
 
     return Scaffold(
       body: Container(
@@ -39,28 +53,34 @@ class ResultsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("RESULTS",
+                      Text("",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 25,
                         fontWeight: FontWeight.w800
                       ),),
-                      Text("You got 8 out of ${questions.length} questions correct!",
+                      Text("You got $correctAnswerCount out of ${questions.length} questions correct!",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16
                       ),),
 
-                      ListView.builder(
-                        itemCount: 4,
-                        itemBuilder: (context, index) {
-                          return Text('You got 8 out of ${questions.length} questions correct!',
-                                style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16
-                              )
-                            );
-                      },)
+                      Gap(24),
+
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        width: MediaQuery.of(context).size.width,
+
+                        child: ListView.builder(
+                          itemCount: questions.length,
+                          itemBuilder: (context, index) {
+                            return FinalAnswer(
+                              index: index, 
+                              selectedAnswer: chosenAnswers[index]);
+
+                          }
+                        )
+                      )
                     ],
                   ),
                 ),
