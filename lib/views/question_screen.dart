@@ -36,7 +36,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               MaterialPageRoute(builder: (context) {
                 return ResultsScreen(chosenAnswers: chosenAnswers);
               }));
-             // print(chosenAnswers);
+         
             return FinalAnswer(
               index: index, 
               selectedAnswer: chosenAnswers[index]);
