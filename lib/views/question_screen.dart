@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:quiz_application/components/button.dart';
-import 'package:quiz_application/components/data/data.dart';
+import 'package:quiz_application/components/final_answer.dart';
+import 'package:quiz_application/data/data.dart';
+import 'package:quiz_application/views/results_screen.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
+  
 
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
@@ -18,7 +21,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   List<Widget> renderAnswers(int index) {
     List<Widget> answerButtons = [];
 
-    List<String> answers = questions[index]['options'];
+    List<String> answers = questions[index].answers;
 
     answers.forEach((String answer){
       Widget button = Button(
@@ -28,9 +31,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
           chosenAnswers.add(answer);
          
           if((questions.length - 1)  <= currentQuestion){
-            print(chosenAnswers);
-            print('number of selected answers are ${chosenAnswers.length}');
-            return;
+
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) {
+                return ResultsScreen(chosenAnswers: chosenAnswers);
+              }));
+         
+            return FinalAnswer(
+              index: index, 
+              selectedAnswer: chosenAnswers[index]);
           }
 
           setState(() {
@@ -73,7 +82,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(questions[currentQuestion]['question'],
+              child: Text(questions[currentQuestion].questions,
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w800,
